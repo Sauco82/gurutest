@@ -1,7 +1,8 @@
 var fs = require('fs');
 var encodeMessage = require('../src/encodeMessage');
 
-var message = fs.readFileSync('assets/message.txt', 'utf8').split('\n')[0]; //Get only first line since newlines are anyways illegal
-    encodedMessage = encodeMessage(message);
+var obfuscate = process.argv[2] === "obfuscate";
 
-console.log(encodedMessage);
+var messages = fs.readFileSync('assets/message.txt', 'utf8').split('\n');
+
+messages.forEach( m => console.log(encodeMessage(m, obfuscate)) );
